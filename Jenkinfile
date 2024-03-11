@@ -70,7 +70,7 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container
-                    sh 'docker-compose up'
+                    sh 'docker-compose up -d'
                 }
             }
         }
