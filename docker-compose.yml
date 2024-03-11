@@ -1,13 +1,15 @@
 version: '3'
 services:
   web-backend:
-    image: fewfindjob-web-backend
+    image: fewfewfewfewfew/backend:latest
+    pull_policy: always
     build: backend
     ports:
       - "5000:5000"
 
   web-frontend:
-    image: fewfindjob-web-frontend
+    image: fewfewfewfewfew/frontend:latest
+    pull_policy: always
     build: frontend
     ports:
       - "3000:3000"
