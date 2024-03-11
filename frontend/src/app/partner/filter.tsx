@@ -17,7 +17,7 @@ export function Filter({ data1 }: { data1: { companyname: string }[] }) {
         setData(filteredName);
     };
 
-    return (
+    return data && (
         <div>
             <div className="flex items-center max-w-md mx-auto bg-white rounded-lg mb-9" >
                 <div className="w-full">
