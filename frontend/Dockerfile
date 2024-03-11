@@ -1,4 +1,4 @@
-FROM node:12.22-alpine AS installer
+FROM node                         
 
 WORKDIR /usr/app
 
@@ -6,11 +6,11 @@ RUN npm install --global pm2
 
 COPY ./package*.json ./
 
-RUN npm install
+RUN npm install --force
 
 COPY ./ ./
 
-RUN npm run build
+RUN yarn build
 
 EXPOSE 3000
 
