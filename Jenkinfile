@@ -4,7 +4,6 @@ pipeline {
     environment {
         // Define variables
         DOCKER_IMAGE       = 'fewfewfewfewfew/test:latest'
-        DOCKER_IMAGE       = 'fewfewfewfewfew/test:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
