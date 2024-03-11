@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Checkout your source code from version control
              
-                sh 'echo Start Jenksins............'
+                sh 'echo Start Jenkssins............'
                 sh 'echo docker : user = $DOCKER_CREDENTIALS_USR : password = $DOCKER_CREDENTIALS_PSW'
             }
         }
