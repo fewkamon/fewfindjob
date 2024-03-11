@@ -5,14 +5,14 @@ services:
     pull_policy: always
     build: backend
     ports:
-      - "5000:5000"
+      - "5000:80"
 
   web-frontend:
     image: fewfewfewfewfew/frontend:latest
     pull_policy: always
     build: frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
 
   web-test:
     image: fewfindjob-web-test:latest

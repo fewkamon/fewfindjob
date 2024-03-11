@@ -6,4 +6,4 @@ RUN npm rebuild bcrypt --build-from-source
 RUN npx prisma generate             
 RUN yarn build                     
 EXPOSE 5000                        
-CMD ["npm", "run","start:prod"]
+CMD ["npm", "run","start:prod", "--host", "0.0.0.0", "--port", "80"]
