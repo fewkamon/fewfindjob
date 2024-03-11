@@ -19,15 +19,19 @@ pipeline {
 
         stage('Build Docker Compose') {
             steps {
-                sh 'echo "Running in $(pwd)"'
-                sh 'echo start build the Docker image = $DOCKER_IMAGE'
-                sh 'docker-compose build'
+                script {
+                    sh 'echo "Running in $(pwd)"'
+                    sh 'echo start build the Docker image = $DOCKER_IMAGE'
+                    sh 'docker-compose build'
+                }
             }
         }
 
         stage('Check Docker Images') {
             steps {
-                sh 'docker images'
+                script {
+                    sh 'docker images'
+                }
             }
         }
 
