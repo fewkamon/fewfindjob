@@ -14,12 +14,7 @@ services:
     ports:
       - "3000:3000"
 
-  nginx:
-    restart: always
-    build:
-      context: nginx/
-    depends_on:
-      - web-frontend
-      - web-backend
+  web:
+    image: nginx
     ports:
       - "8080:80"
