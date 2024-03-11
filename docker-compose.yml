@@ -4,8 +4,6 @@ services:
     image: fewfewfewfewfew/backend:latest
     pull_policy: always
     build: backend
-    environment:
-      - EXTERNAL_IP=34.124.226.5
     ports:
       - "5000:5000"
 
@@ -13,8 +11,6 @@ services:
     image: fewfewfewfewfew/frontend:latest
     pull_policy: always
     build: frontend
-    environment:
-      - EXTERNAL_IP=34.124.226.5
     ports:
       - "3000:3000"
 
