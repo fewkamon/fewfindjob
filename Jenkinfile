@@ -14,7 +14,7 @@ pipeline {
              
                 sh 'echo Start Jenkssins............'
                 sh 'echo docker : user = $DOCKER_CREDENTIALS_USR : password = $DOCKER_CREDENTIALS_PSW'
-                sh 'ls'
+                sh 'ls backend'
             }
         }
 
