@@ -13,8 +13,3 @@ services:
     build: frontend
     ports:
       - "3000:3000"
-
-  web-test:
-    build: test
-    ports:
-      - "8085:80"
