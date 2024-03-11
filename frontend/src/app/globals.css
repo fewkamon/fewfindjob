@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background1: #F5F5F5;
+  }
+}
+
+body {
+  background: var(--background1)
+}
+
+.ant-btn.ant-btn-primary {
+  background-color: green 
+}
+
+.ant-switch {
+  background-color: #76777FFF 
+
+}

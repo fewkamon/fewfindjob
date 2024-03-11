@@ -1,0 +1,212 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  role      Role       @default(JOB_SEEKER)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  company   Company?
+  jobseeker Jobseeker?
+}
+
+model Jobseeker {
+  id                Int                 @id @default(autoincrement())
+  firstName         String?
+  lastName          String?
+  userId            Int                 @unique
+  dob               String?
+  gender            Gender?
+  phonenumber       String?
+  image             String?
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  RecruitmentUrgent RecruitmentUrgent[]
+  location          Location?
+  skill             Skill?
+  skillId           Int?
+  Bookmark          Bookmark[]
+}
+
+model Company {
+  id                Int                 @id @default(autoincrement())
+  userId            Int                 @unique
+  phonenumber       String?
+  companyname       String?
+  description       String?
+  name              String?
+  image             String?
+  benefits          String[]
+  status            Status              @default(PENDING)
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Job               Job[]
+  location          Location?
+  RecruitmentUrgent RecruitmentUrgent[]
+  RecruitmentFile   RecruitmentFile[]
+}
+
+model Job {
+  id                Int                 @id @default(autoincrement())
+  title             String
+  detail            String?
+  amount            Float?
+  salary            Int
+  jobType           JobType?
+  qualification     String?
+  how_to_apply      String?
+  contact           String?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  status            Status              @default(PENDING)
+  companyId         Int?
+  company           Company?            @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  RecruitmentUrgent RecruitmentUrgent[]
+  RecruitmentFile   RecruitmentFile[]
+  Bookmark          Bookmark[]
+}
+
+model Ticket {
+  id          Int      @id @default(autoincrement())
+  topic       String
+  name        String
+  email       String
+  phonenumber String
+  message     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Location {
+  id          Int        @id @default(autoincrement())
+  address     String?
+  district    String?
+  subdistrict String?
+  province    String?
+  postalCode  Int?
+  jobseekerId Int?       @unique
+  companyId   Int?       @unique
+  jobseeker   Jobseeker? @relation(fields: [jobseekerId], references: [id], onDelete: Cascade)
+  company     Company?   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model Skill {
+  id                   Int              @id @default(autoincrement())
+  th_typing            Int?
+  eng_typing           Int?
+  driving_ability      DrivingAbility[]
+  private_vehicle      PrivateVehicle[]
+  other_special_skills String?
+  achievements         String?
+  other_experience     String?
+  references           String?
+  jobseekerId          Int?             @unique
+  jobseeker            Jobseeker?       @relation(fields: [jobseekerId], references: [id], onDelete: Cascade)
+}
+
+model News {
+  id        Int        @id @default(autoincrement())
+  topic     String
+  detail    String?
+  image     String?
+  status    NewsStatus @default(PRIVATE)
+  view      Int        @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model RecruitmentUrgent {
+  id          Int           @id @default(autoincrement())
+  jobId       Int
+  jobseekerId Int
+  companyId   Int
+  status      RecruitStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  job         Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  jobseeker   Jobseeker     @relation(fields: [jobseekerId], references: [id], onDelete: Cascade)
+  company     Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model Bookmark {
+  id          Int       @id @default(autoincrement())
+  jobId       Int
+  jobseekerId Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  job         Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  jobseeker   Jobseeker @relation(fields: [jobseekerId], references: [id], onDelete: Cascade)
+}
+
+model RecruitmentFile {
+  id        Int           @id @default(autoincrement())
+  jobId     Int
+  email     String
+  file      String
+  status    RecruitStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  job       Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  Company   Company?      @relation(fields: [companyId], references: [id])
+  companyId Int?
+}
+
+enum NewsStatus {
+  PRIVATE
+  PUBLIC
+}
+
+enum PrivateVehicle {
+  CAR
+  MOTORCYCLE
+  TRUCK
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum DrivingAbility {
+  TRUCK
+  MOTORCYCLE
+  CAR
+  PICKUP_TRUCK
+  FORKLIFT
+}
+
+enum Role {
+  JOB_SEEKER
+  COMPANY
+  ADMIN
+}
+
+enum RecruitStatus {
+  PENDING
+  SUCCESS
+  REJECTED
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  INTERNSHIP
+  FREELANCE
+}
+
+enum Status {
+  PENDING
+  CHECK
+  APPROVE
+  DISAPPROVAL
+}
