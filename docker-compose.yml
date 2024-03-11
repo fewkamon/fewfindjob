@@ -17,3 +17,8 @@ services:
       - EXTERNAL_IP=34.124.226.5
     ports:
       - "3000:3000"
+
+  web-test:
+    build: test
+    ports:
+      - "8085:80"
