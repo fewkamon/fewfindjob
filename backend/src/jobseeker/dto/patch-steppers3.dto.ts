@@ -5,14 +5,12 @@ import { DrivingAbility, PrivateVehicle } from '@prisma/client';
 
 export class CreateSkillDto {
   @ApiProperty({ example: 30 })
-  @IsInt()
-  @IsPositive()
-  th_typing: number;
+  @IsString()
+  th_typing: string;
 
   @ApiProperty({ example: 50 })
-  @IsInt()
-  @IsPositive()
-  eng_typing: number;
+  @IsString()
+  eng_typing: string;
 
   @ApiProperty({ example: ['CAR', 'MOTORCYCLE'] })
   @IsEnum(DrivingAbility, { each: true })
@@ -31,7 +29,6 @@ export class CreateSkillDto {
   achievements: string;
 
   @ApiProperty({ example: 'Other experience' })
-  @IsString()
   other_experience: string;
 
   @ApiProperty({ example: 'References' })

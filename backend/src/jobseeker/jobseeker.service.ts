@@ -64,8 +64,8 @@ export class JobseekerService {
             data: {
                 skill: {
                     update: {
-                        th_typing: skill.th_typing,
-                        eng_typing: skill.eng_typing,
+                        th_typing: ~~skill.th_typing,
+                        eng_typing: ~~skill.eng_typing,
                         driving_ability: skill.driving_ability,
                         private_vehicle: skill.private_vehicle,
                         other_special_skills: skill.other_special_skills,

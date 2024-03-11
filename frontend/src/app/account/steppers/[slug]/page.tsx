@@ -185,6 +185,8 @@ export default function Steppers({ params }: PageProps) {
 
             try {
 
+                sss.jobseeker.location["postalCode"] = tambonsData.RECORDS[zipcode].zip_code
+
                 const response = await fetchWithToken("/jobseeker/info/2", {
                     method: "PATCH", body: JSON.stringify(
                         {
