@@ -60,9 +60,8 @@ pipeline {
             steps {
                 script {
                     // Remove Docker images and containers
-                    sh  'docker rm -f $(sudo docker ps -a -q)' 
+                    sh  'docker ps -a -q | xargs -r sudo docker rm -f' 
                     sh  'docker rmi -f $(sudo docker images -q)'
-                    sh  'docker volume rm $(sudo docker volume ls -q)'
                 }
             }
         }
