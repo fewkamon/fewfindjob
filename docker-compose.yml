@@ -13,3 +13,13 @@ services:
     build: frontend
     ports:
       - "3000:3000"
+
+  nginx:
+    restart: always
+    build:
+      context: nginx/
+    depends_on:
+      - web-frontend
+      - web-backend
+    ports:
+      - "8080:80"
