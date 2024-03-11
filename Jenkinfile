@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         // Define variables
-        DOCKER_IMAGE       = 'fewfewfewfewfew/test:latest'
+        DOCKER_IMAGE_FRONTEND       = 'fewfewfewfewfew/frontend:latest'
+        DOCKER_IMAGE_BACKEND       = 'fewfewfewfewfew/backend:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
@@ -44,13 +45,13 @@ pipeline {
                     sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
                     sh 'echo start push frontend'
                     // Push the image
-                    sh 'docker tag fewfindjob-web-frontend:latest fewfewfewfewfew/frontend'
-                    sh 'docker push fewfewfewfewfew/frontend'
+                    sh 'docker tag fewfindjob-web-frontend:latest $DOCKER_IMAGE_FRONTEND'
+                    sh 'docker push $DOCKER_IMAGE_FRONTEND'
 
                     sh 'echo start push backend'
                     // Push the image
-                    sh 'docker tag fewfindjob-web-backend:latest fewfewfewfewfew/backend'
-                    sh 'docker push fewfewfewfewfew/backend'
+                    sh 'docker tag fewfindjob-web-backend:latest $DOCKER_IMAGE_BACKEND'
+                    sh 'docker push $DOCKER_IMAGE_BACKEND'
                 }
             }
         }
