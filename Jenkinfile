@@ -4,6 +4,7 @@ pipeline {
     environment {
         // Define variables
         DOCKER_IMAGE       = 'fewfewfewfewfew/test:latest'
+        DOCKER_IMAGE       = 'fewfewfewfewfew/test:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
@@ -42,8 +43,15 @@ pipeline {
                     
                     // Login to Docker Hub
                     sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
+                    sh 'echo start push frontend'
                     // Push the image
-                    sh 'docker push $DOCKER_IMAGE'
+                    sh 'docker tag fewfindjob-web-frontend:latest fewfewfewfewfew/frontend'
+                    sh 'docker push fewfewfewfewfew/frontend'
+
+                    sh 'echo start push backend'
+                    // Push the image
+                    sh 'docker tag fewfindjob-web-backend:latest fewfewfewfewfew/backend'
+                    sh 'docker push fewfewfewfewfew/backend'
                 }
             }
         }
