@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     // Remove Docker images and containers
-                    # sh  'docker ps -a -q' 
+                    # sh  'docker rm -v -f $(docker ps -qa)' 
                 }
             }
         }
