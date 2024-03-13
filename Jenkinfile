@@ -56,11 +56,17 @@ pipeline {
             }
         }
 
+        stage('Clear Docker') {
+            steps {
+                sh 'docker stop frontend'
+                sh 'docker stop backend'
+            }
+        }
 
         stage('Deploy') {
             steps {
                 sh 'docker run -d --name frontend -p 80:80 fewfewfewfewfew/frontend'
-                sh 'docker run -d --name backend -p 80:80 fewfewfewfewfew/backend'
+                sh 'docker run -d --name backend -p 5000:80 fewfewfewfewfew/backend'
             }
         }
     }
