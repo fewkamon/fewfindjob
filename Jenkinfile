@@ -40,16 +40,11 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    
-                    // Login to Docker Hub
                     sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
                     sh 'echo start push frontend'
-                    // Push the image
                     sh 'docker tag $DOCKER_IMAGE_FRONTEND $DOCKER_IMAGE_FRONTEND'
                     sh 'docker push $DOCKER_IMAGE_FRONTEND'
-
                     sh 'echo start push backend'
-                    // Push the image
                     sh 'docker tag $DOCKER_IMAGE_BACKEND $DOCKER_IMAGE_BACKEND'
                     sh 'docker push $DOCKER_IMAGE_BACKEND'
                 }
@@ -66,8 +61,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker run -d --name frontend -p 80:80 fewfewfewfewfew/frontend'
-                sh 'docker run -d --name backend -p 5000:5000 fewfewfewfewfew/backend'
+                sh 'docker-compose up -d'
             }
         }
     }
