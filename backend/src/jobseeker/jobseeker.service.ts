@@ -4,11 +4,17 @@ import { PrismaService } from 'src/prisma.service';
 import { Steppers1PatchDto } from './dto/patch-steppers1.dto';
 import { Steppers2PatchDto } from './dto/patch-steppers2.dto';
 import { Steppers3PatchDto } from './dto/patch-steppers3.dto';
+import { AwsS3Service } from 'utils/s3.service';
+import { RandomService } from 'utils/random.service';
 
 @Injectable()
 export class JobseekerService {
 
-    constructor(private prisma: PrismaService) { }
+    constructor(
+        private prisma: PrismaService,
+        private s3service: AwsS3Service,
+        private randomService: RandomService
+    ) { }
 
     async getAllJob(jobseekerId: number): Promise<RecruitmentUrgent[]> {
         return this.prisma.recruitmentUrgent.findMany({
@@ -79,13 +85,19 @@ export class JobseekerService {
     }
 
 
-    async changeInfoStep4(params: { where: Prisma.JobseekerWhereUniqueInput, data: string }): Promise<Jobseeker> {
+    async changeInfoStep4(params: { where: Prisma.JobseekerWhereUniqueInput, data: any }): Promise<Jobseeker> {
         const { where, data } = params;
-        return this.prisma.jobseeker.update({
+
+        const genprofile_img = this.randomService.generateRandomTextAndNumber(10, 1, 9)
+        const s3banner_img = await this.s3service.uploadFile(data, `profile/${genprofile_img}`)
+
+        const result = await this.prisma.jobseeker.update({
             where,
             data: {
-                image: data
+                image: s3banner_img.Location
             },
         });
+
+        return result
     }
 }

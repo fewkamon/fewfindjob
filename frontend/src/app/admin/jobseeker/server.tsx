@@ -2,7 +2,7 @@
 import React from 'react'
 import fetchWithToken from '@/utils/fetchUtils';
 import { cookies } from 'next/headers';
-import Table from './table'
+const Table = React.lazy(() => import('./table'));
 
 async function fetchData() {
     const cookieStore = cookies()

@@ -207,7 +207,7 @@ export default function Page({ data1 }: any) {
                                             {dataone?.jobseeker.image ? (
                                                 <Image
 
-                                                    src={`${BASE_URL}/file/${dataone?.jobseeker.image}`}
+                                                    src={`${dataone?.jobseeker.image}`}
                                                     alt=""
                                                     width={110}
                                                     height={140}

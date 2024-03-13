@@ -35,7 +35,7 @@ export default async function Server() {
 
                                 <ImageWithFallback
                                     src={
-                                        `${BASE_URL}/file/${item.image}`
+                                        `${item.image}`
                                     }
                                     fallbackSrc={`/notfound.png`}
                                     className='object-cover rounded-lg'

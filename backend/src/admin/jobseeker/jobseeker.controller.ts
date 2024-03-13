@@ -5,7 +5,6 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { RoleAdminGuard } from 'src/auth/role/roles.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@UseGuards(AuthGuard, RoleAdminGuard)
 @ApiBearerAuth()
 @ApiTags('Admin Jobseeker')
 @Controller('admin/jobseeker')

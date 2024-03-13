@@ -37,13 +37,7 @@ export class CompanyController {
                 return callback(null, false);
             }
             callback(null, true);
-        },
-        storage: diskStorage({
-            destination: './upload',
-            filename: (req, file, callback) => {
-                callback(null, `${new Date().getTime()}.jpg`);
-            }
-        }),
+        }
     }))
     async doSteppers4Info(@Req() req, @UploadedFile() file: Express.Multer.File, @Body() body: CompanyLogo): Promise<Company> {
 
@@ -56,7 +50,7 @@ export class CompanyController {
         
         return await this.companyService.upLoadLogo({
             where: { userId: req.user.sub },
-            data: file.filename
+            data: file
         })
     }
 

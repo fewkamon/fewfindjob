@@ -29,9 +29,8 @@ export default function Layout({ children }: PageProps) {
 
                             <div className="bg-white rounded-lg px-5 py-3 flex items-center">
                                 <div className="flex items-center">
-
                                     <Image src={
-                                        data.data.company.image ? `${BASE_URL}/file/${data.data.company.image}` : Art
+                                        data.data.company.image ? data.data.company.image : Art
                                     } className='object-cover w-[65px] h-[65px] border rounded-full' width={65} height={65} alt="t" />
 
 

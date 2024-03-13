@@ -6,6 +6,7 @@ import Table from './table'
 
 async function fetchData() {
     const cookieStore = cookies()
+    
     const token = cookieStore.getAll()[0] ? cookieStore.getAll()[0].value : ""
     const response = await fetchWithToken("/admin/news", { method: "GET", cache: "no-store", headers: { Authorization: `Bearer ${token}` } }, 0)
     if (await response.ok) {
@@ -14,10 +15,15 @@ async function fetchData() {
         const test = await response.json()
         return test["message"]
     }
+
+    
 }
 
 export default async function table() {
     const data = await fetchData()
+
+    console.log(data);
+    
 
     return (
         <div>

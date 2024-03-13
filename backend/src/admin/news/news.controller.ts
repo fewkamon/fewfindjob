@@ -35,12 +35,6 @@ export class NewsController {
             }
             callback(null, true);
         },
-        storage: diskStorage({
-            destination: './upload',
-            filename: (req, file, callback) => {
-                callback(null, `${new Date().getTime()}.jpg`);
-            }
-        }),
     }))
     async createNews(@Req() req, @UploadedFile() file: Express.Multer.File, @Body() body: AdminNewsCreateDto): Promise<News> {
 
@@ -51,7 +45,9 @@ export class NewsController {
             throw new BadRequestException('invalid file');
         }
 
-        return await this.newsService.createNews(body.topic, body.detail, file.filename);
+        console.log(file);
+        
+        return await this.newsService.createNews(body.topic, body.detail, file);
     }
 
     @Patch("/:id")

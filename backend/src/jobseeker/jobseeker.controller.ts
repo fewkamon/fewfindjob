@@ -65,33 +65,18 @@ export class JobseekerController {
             }
             callback(null, true);
         },
-        storage: diskStorage({
-            destination: './upload',
-            filename: (req, file, callback) => {
-                callback(null, `${new Date().getTime()}.jpg`);
-            }
-        }),
     }))
     async doSteppers4Info(@Req() req, @UploadedFile() file: Express.Multer.File, @Body() body: Steppers4PatchDto): Promise<Jobseeker> {
-
         if (req.fileValidationError) {
             throw new BadRequestException(req.fileValidationError);
         }
         if (!file) {
             throw new BadRequestException('invalid file');
         }
-        
-        const dimensions = imageSize(file.path);
-        const expectedWidth = 110;
-        const expectedHeight = 140;
-        if (dimensions.width !== expectedWidth || dimensions.height !== expectedHeight) {
-            fs.unlinkSync(file.path);
-            throw new BadRequestException(`ขนาดรูปต้องเป็น ${expectedWidth}x${expectedHeight} เท่านั้น`);
-        }
-
+       
         return await this.jobseekerService.changeInfoStep4({
             where: { userId: req.user.sub },
-            data: file.filename
+            data: file
         })
     }
 

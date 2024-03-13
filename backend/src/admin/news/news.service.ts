@@ -1,10 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { News, NewsStatus } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
+import { RandomService } from 'utils/random.service';
+import { AwsS3Service } from 'utils/s3.service';
 
 @Injectable()
 export class NewsService {
-    constructor(private prisma: PrismaService) { }
+    constructor(private prisma: PrismaService,
+        private s3service: AwsS3Service,
+        private randomService: RandomService) { }
 
     async getAllNews(): Promise<News[]> {
         const news = await this.prisma.news.findMany({
@@ -15,12 +19,19 @@ export class NewsService {
         return news
     }
 
-    async createNews(topic: string, detail: string, image: string): Promise<News> {
+    async createNews(topic: string, detail: string, image: any): Promise<News> {
+
+        const genlogo_img = this.randomService.generateRandomTextAndNumber(10, 1, 9)
+        const s3logo_img = await this.s3service.uploadFile(image, `logo/${genlogo_img}`)
+        console.log(s3logo_img);
+
+
+
         const data = await this.prisma.news.create({
             data: {
                 topic: topic,
                 detail: detail,
-                image: image
+                image: s3logo_img.Location
             },
         });
         return data

@@ -16,6 +16,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'media.discordapp.net',
             },
+            {
+                protocol: 'https',
+                hostname: 'tewtetwe.s3.amazonaws.com',
+            },
         ],
     },
     env: {

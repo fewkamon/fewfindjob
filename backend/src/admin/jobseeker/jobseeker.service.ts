@@ -18,6 +18,9 @@ export class JobseekerService {
                 },
             },
         });
+
+        console.log(user);
+        
         delete user["password"]
         return user
     }
