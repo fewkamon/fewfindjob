@@ -56,6 +56,16 @@ pipeline {
             }
         }
 
+        stage('Clear Docker') {
+            steps {
+                script {
+                    // Run the Docker container
+                    sh 'docker-compose down'
+              
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 script {
