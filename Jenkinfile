@@ -61,8 +61,7 @@ pipeline {
                 script {
                     // Run the Docker container
                     sh 'docker-compose down'
-                    sh 'docker image rm $DOCKER_IMAGE_BACKEND'
-                    sh 'docker image rm $DOCKER_IMAGE_FRONTEND'
+              
                 }
             }
         }
