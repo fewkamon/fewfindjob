@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     sh 'echo "Running in $(pwd)"'
-                    sh 'echo start build the Docker image = $DOCKER_IMAGE'
+                    sh 'echo start build the Docker Compose'
                     sh 'docker-compose build'
                 }
             }
@@ -64,7 +64,6 @@ pipeline {
 
     post {
         always {
-            // Logout from Docker Hub
             sh 'docker logout'
         }
     }
