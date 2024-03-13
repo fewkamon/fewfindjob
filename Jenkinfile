@@ -58,8 +58,8 @@ pipeline {
 
         stage('Clear Docker') {
             steps {
-                sh 'docker stop frontend'
-                sh 'docker stop backend'
+                sh 'docker rm frontend'
+                sh 'docker rm backend'
             }
         }
 
