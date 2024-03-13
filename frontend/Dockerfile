@@ -6,12 +6,12 @@ RUN npm install --global pm2
 
 COPY ./package*.json ./
 
-RUN npm install --force
+RUN yarn install --force
 
 COPY ./ ./
 
-RUN npm run build
+RUN yarn build
 
 USER node
 
-CMD [ "pm2-runtime", "npm", "--", "start" ]
+CMD [ "pm2-runtime", "yarn", "--", "start" ]

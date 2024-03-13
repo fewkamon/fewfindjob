@@ -32,7 +32,7 @@ pipeline {
         stage('Check Docker Images') {
             steps {
                 script {
-                    sh 'docker imagess'
+                    sh 'docker images'
                 }
             }
         }
@@ -50,8 +50,19 @@ pipeline {
 
                     sh 'echo start push backend'
                     // Push the image
-                    sh 'docker tag $DOCKER_IMAGE_BACKEND $DOCKER_IMAGE_BACKEND'
+                    sh 'docker tag $DOCKER_IMAGE_FRONTEND $DOCKER_IMAGE_BACKEND'
                     sh 'docker push $DOCKER_IMAGE_BACKEND'
+                }
+            }
+        }
+
+        stage('Clear Docker') {
+            steps {
+                script {
+                    // Run the Docker container
+                    sh 'docker stop $(docker ps -aq)'
+                    sh 'docker rmi $DOCKER_IMAGE_FRONTEND'
+                    sh 'docker rmi $DOCKER_IMAGE_BACKEND'
                 }
             }
         }
