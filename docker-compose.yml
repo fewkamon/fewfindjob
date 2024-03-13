@@ -3,14 +3,12 @@ services:
 
   web-frontend:
     image: fewfewfewfewfew/frontend:latest
-    pull_policy: always
     build: frontend
     ports:
       - "3000:80"
   
   web-backend:
     image: fewfewfewfewfew/backend:latest
-    pull_policy: always
     build: backend
     ports:
       - "5000:80"
