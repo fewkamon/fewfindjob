@@ -9,9 +9,9 @@ services:
       - "3000:80"
   
   web-backend:
-    image: fewfindjob-web-frontend-1
+    image: fewfindjob-web-backend-1
     pull_policy: always
-    build: frontend
+    build: backend
     ports:
-      - "3000:80"
+      - "5000:80"
 
