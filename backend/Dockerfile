@@ -6,5 +6,7 @@ RUN npm install
 RUN npm rebuild bcrypt --build-from-source            
 RUN npx prisma generate             
 RUN yarn build      
+RUN chown -R node:node /usr/src/app
 USER node
-CMD [ "pm2-runtime", "npm", "--", "start" ]
+EXPOSE 5000
+CMD ["pm2-runtime", "start", "npm", "--", "start"]
