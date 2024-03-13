@@ -5,4 +5,4 @@ RUN npm install
 RUN npm rebuild bcrypt --build-from-source            
 RUN npx prisma generate             
 RUN yarn build                     
-CMD ["npm", "run","start:prod", "--host", "0.0.0.0", "--port", "80"]
+CMD ["npm", "run","start:prod"]
