@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container
-                    sh 'docker stop fewfindjob'
+                    sh 'docker-compose down'
                 }
             }
         }
