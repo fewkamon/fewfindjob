@@ -50,7 +50,7 @@ pipeline {
 
                     sh 'echo start push backend'
                     // Push the image
-                    sh 'docker tag $DOCKER_IMAGE_FRONTEND $DOCKER_IMAGE_BACKEND'
+                    sh 'docker tag $DOCKER_IMAGE_BACKEND $DOCKER_IMAGE_BACKEND'
                     sh 'docker push $DOCKER_IMAGE_BACKEND'
                 }
             }
@@ -61,6 +61,8 @@ pipeline {
                 script {
                     // Run the Docker container
                     sh 'docker-compose down'
+                    sh 'docker image rm $DOCKER_IMAGE_BACKEND'
+                    sh 'docker image rm $DOCKER_IMAGE_FRONTEND'
                 }
             }
         }
