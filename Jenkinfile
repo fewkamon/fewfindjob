@@ -56,16 +56,6 @@ pipeline {
             }
         }
 
-        stage('Clear Docker Components') {
-            steps {
-                script {
-                    // Remove Docker images and containers
-                    sh  'docker rm -v -f $(docker ps -qa)' 
-                }
-            }
-        }
-
-
         stage('Deploy') {
             steps {
                 script {
