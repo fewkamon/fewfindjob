@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // Define variables
         DOCKER_IMAGE_FRONTEND       = 'fewfewfewfewfew/frontend:latest'
         DOCKER_IMAGE_BACKEND       = 'fewfewfewfewfew/backend:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
@@ -11,11 +10,8 @@ pipeline {
     stages {
         stage('Start Jenkins') {
             steps {
-                // Checkout your source code from version control
-             
                 sh 'echo Start Jenkssins............'
                 sh 'echo docker : user = $DOCKER_CREDENTIALS_USR : password = $DOCKER_CREDENTIALS_PSW'
-                sh 'ls backend'
             }
         }
 

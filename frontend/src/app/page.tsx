@@ -24,7 +24,7 @@ export default function Home() {
                 ยินดีต้อนรับสู่ FindJob -
               </p>
               <p className='text-[#2255A4] font-bold text-[30px] '>
-                แหล่งหางานออนไลน์ที่ใหญ่ที่สุด!!
+                แหล่งหางานออนไลน์ที่ใหญ่ที่สุด!
               </p>
             </div>
 
