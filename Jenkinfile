@@ -56,12 +56,6 @@ pipeline {
             }
         }
 
-        stage('Clear Docker') {
-            steps {
-                sh 'docker rm frontend'
-                sh 'docker rm backend'
-            }
-        }
 
         stage('Deploy') {
             steps {
