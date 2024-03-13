@@ -7,3 +7,11 @@ services:
     build: frontend
     ports:
       - "3000:80"
+  
+  web-backend:
+    image: fewfindjob-web-frontend-1
+    pull_policy: always
+    build: frontend
+    ports:
+      - "3000:80"
+
