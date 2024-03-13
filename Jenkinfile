@@ -56,10 +56,18 @@ pipeline {
             }
         }
 
+        stage('Clear Docker Container') {
+            steps {
+                script {
+                    sh 'docker rm -v -f \$(docker ps -qa)'
+                }
+            }
+        }
 
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -d'
+                sh 'docker run -d --name frontend -p 80:80 fewfewfewfewfew/frontend'
+                sh 'docker run -d --name backend -p 5000:80 fewfewfewfewfew/backend'
             }
         }
     }
