@@ -24,7 +24,7 @@ async function isLoggedIn() {
     const cookieStore = cookies()
     const token = cookieStore.get("your_token_key_here") ? cookieStore.get("your_token_key_here")?.value : ""
     
-    const response = await fetchWithToken("/auth/me", { method: "GET", headers: { Authorization: `Bearer ${token}` } }, 60)
+    const response = await fetchWithToken("/auth/me", { method: "GET", headers: { Authorization: `Bearer ${token}` }, cache: "no-store" }, 0)
     if (await response.ok) {
       return await response.json();
     } else {

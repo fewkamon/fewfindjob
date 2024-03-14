@@ -16,6 +16,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'media.discordapp.net',
             },
+            {
+                protocol: 'http',
+                hostname: '34.87.80.40',
+            },
         ],
     },
     env: {
